@@ -19,17 +19,8 @@ def _check_status(player):
 def ingame():
     pass
 
-
-def lobby():
-    lobby = """
-        
-        Wait...
-        First of all, you need to create your Alter Ego (character)
-
-        """
-    print(lobby)
-
-    # Naming the character
+def _player_creation():
+        # Naming the character
     name = input('How you want to name him/her: ')
     
     # Assigning class
@@ -54,10 +45,18 @@ def lobby():
     _check_status(player)
     print(' ')
     
-    call('clear')
     print('In game!')
     ingame() #Thowing ingame() function
 
+def lobby():
+    lobby = """
+        
+        Wait...
+        First of all, you need to create your Alter Ego (character)
+
+        """
+    print(lobby)
+    _player_creation()
 
 def run():
     
