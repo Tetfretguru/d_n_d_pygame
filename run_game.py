@@ -2,9 +2,22 @@ import character_mkr as mk
 from subprocess import call
 
 def _check_status(player):
-    status = player.stats
+    print('*** Info card ***')
+    print(' ')
+    print(f'Name: {player.name}')
+    print(f'Class: {player.clase}')
+    print(f'Race: {player.race}')
+    print(f'Aligment: {player.aligment}')
+    print(f'Level: {player._level}')
+    print(f'HP: {player._hp}')
+    print(f'XP: {player._xp_point}')
+    print(f'Sats: ')
+    status = player._stats
     for k,v in status.items():
-        print(f'')
+        print(f'    {k} : {v}')
+
+def ingame():
+    pass
 
 
 def lobby():
@@ -29,16 +42,21 @@ def lobby():
     aligment = mk.set_aligment()
 
     # Create character
-    try:
-        player = mk.Character(name, clase, race, aligment)
-        call('clear')
-        print(f'{player.name} has been born old (typical).')
-    except:
-        print(f'Your character named "{name}" could not be created')
+    #try:
+    player = mk.Character(name, clase, race, aligment)
+    call('clear')
+    print(f'{player.name} has been born old (typical).')
+#except:
+    #   print(f'Your character named "{name}" could not be created')
 
-    print('--------------------------------'*20)
+    print('--------'*4)
     print('Check out your stats')
     _check_status(player)
+    print(' ')
+    
+    call('clear')
+    print('In game!')
+    ingame() #Thowing ingame() function
 
 
 def run():
@@ -49,7 +67,7 @@ def run():
 
     if enter == 'y':
         print('Starting game...')
-       lobby()
+        lobby()
     elif enter == 'n':
         print('Good bye then.')
 

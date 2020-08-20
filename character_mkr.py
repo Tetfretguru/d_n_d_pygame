@@ -1,24 +1,45 @@
 import random
+import dices as d
 
 class Character:
     def __init__(self, name, clase, race, aligment):
         self.name = name
         self.clase = clase 
         self._level = 1
-        self.race = aligment
+        self.race = race
+        self.aligment = aligment
         self._xp_point = 0
         self._hp = 100       
         self._stats = _new_stats()
 
-    def _new_stats(self):
-        stats = {
-            'STR':10
-            'DEX':10
-            'INT':10
-            'WIS':10
-            'CHA':10
-        }
-        return stats
+def _roll_dices():
+    tiros = []
+    sim = 0
+    while sim < 4:
+        dado = d.roll_d6()
+        tiros.append(dado)
+        sim += 1
+   
+    values = sorted(tiros)
+    values.pop(0)
+    value = sum(values)
+    return value
+
+def _new_stats():
+    strength = _roll_dices()
+    dexterity = _roll_dices()
+    intelligence = _roll_dices()
+    wisdom = _roll_dices()
+    charisma = _roll_dices()
+
+    stats = {
+        'STR':strength,
+        'DEX':dexterity,
+        'INT':intelligence,
+        'WIS':wisdom,
+        'CHA':charisma
+    }
+    return stats
 
     
 def assigning_class():
@@ -83,7 +104,7 @@ def set_aligment():
     aligments = ('Good', 'Neutral/Good', 'Neutral', 'Neutral/Evil', 'Evil')
     print('The aligment will further in the adventure define the prices you will get: ')
     print('_____________________')
-    print(f'1: {aligments[0]} | 2: {aligments[1]} | 3: {aligments[2]} | 4: {aligments[3]} | 5: {aligments[3]} |')
+    print(f'1: {aligments[0]} | 2: {aligments[1]} | 3: {aligments[2]} | 4: {aligments[3]} | 5: {aligments[4]} |')
 
     msg = """
     
