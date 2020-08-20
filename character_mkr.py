@@ -1,3 +1,4 @@
+from subprocess import call
 import random
 import dices as d
 
@@ -42,7 +43,7 @@ def _new_stats():
     return stats
 
     
-def assigning_class():
+def _assigning_class():
     
     clases = ('Warrior', 'Mage', 'Hunter', 'Vampire')
     print('Select a class for your character: ')
@@ -72,7 +73,7 @@ def assigning_class():
         print('There is no such an option.')
         assigning_class()
 
-def assigning_races():
+def _assigning_races():
     races = ('Human', 'Elf', 'Orc', 'Undead')
     print('Please select the race you want for your character to be: ')
     print('_____________________')
@@ -100,7 +101,7 @@ def assigning_races():
         print('There is no such an option.')
         assigning_race()     
 
-def set_aligment():
+def _set_aligment():
     aligments = ('Good', 'Neutral/Good', 'Neutral', 'Neutral/Evil', 'Evil')
     print('The aligment will further in the adventure define the prices you will get: ')
     print('_____________________')
@@ -131,3 +132,30 @@ def set_aligment():
         print('No option typed allowed')
         set_aligment()  
 
+def player_creation():
+        # Naming the character
+    name = input('How you want to name him/her: ')
+    
+    # Assigning class
+    clase = _assigning_class()
+
+    # Assigning race
+    race = _assigning_races()
+
+    # Aligment for character
+    aligment = _set_aligment()
+
+    # Create character
+    #try:
+    player = Character(name, clase, race, aligment)
+    call('clear')
+    print(f'{player.name} has been born old (typical).')
+#except:
+    #   print(f'Your character named "{name}" could not be created')
+
+    print('--------'*4)
+    print('Check out your stats')
+    
+    print(' ')
+    
+    return player

@@ -1,5 +1,23 @@
 import character_mkr as mk
 from subprocess import call
+import datetime
+import csv
+
+def _update_player_card(player):
+    f = open('player_card.csv', "w")
+    writer = csv.writer(f)
+    writer.writerow([player.name, player.clase, player.race, player.aligment, player._level, player._hp, player._xp_point, player._stats])
+    
+    f.close()
+
+def _save_player_card(player):
+    file_name = 'player_card.csv'
+
+    f = open('player_card.csv', 'w')
+    writer = csv.DictWriter(f, fieldnames=['name', 'clase', 'race', 'aligment', 'level', 'hp', 'xp','stats'])
+    writer.writeheader()
+    f.close()
+
 
 def _check_status(player):
     print('*** Info card ***')
@@ -16,37 +34,11 @@ def _check_status(player):
     for k,v in status.items():
         print(f'    {k} : {v}')
 
+   
+
 def ingame():
     pass
 
-def _player_creation():
-        # Naming the character
-    name = input('How you want to name him/her: ')
-    
-    # Assigning class
-    clase = mk.assigning_class()
-
-    # Assigning race
-    race = mk.assigning_races()
-
-    # Aligment for character
-    aligment = mk.set_aligment()
-
-    # Create character
-    #try:
-    player = mk.Character(name, clase, race, aligment)
-    call('clear')
-    print(f'{player.name} has been born old (typical).')
-#except:
-    #   print(f'Your character named "{name}" could not be created')
-
-    print('--------'*4)
-    print('Check out your stats')
-    _check_status(player)
-    print(' ')
-    
-    print('In game!')
-    ingame() #Thowing ingame() function
 
 def lobby():
     lobby = """
@@ -56,7 +48,22 @@ def lobby():
 
         """
     print(lobby)
-    _player_creation()
+    player = mk.player_creation()
+    _check_status(player)
+
+    print(' ')
+    check = "Continue (c) / Roll again (r): "
+    msg = input(check)
+    
+    assert msg == 'c' or msg == 'r'
+
+    if msg == 'c':
+        _save_player_card(player)
+        _update_player_card(player)
+        #ingame()
+    elif msg == 'r':
+        player = mk.player_creation() 
+        _check_status(player)
 
 def run():
     
@@ -69,6 +76,8 @@ def run():
         lobby()
     elif enter == 'n':
         print('Good bye then.')
+
+
 
 
 
